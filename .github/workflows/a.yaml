@@ -15,6 +15,31 @@ jobs:
         run: echo 'The time was ${{ steps.hello.outputs.time }}.'
   second:
     name: Second
+    needs: first
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hello world
+        uses: actions/hello-world-javascript-action@v1
+        with:
+          who-to-greet: 'Mona the Octocat'
+        id: hello
+      - name: Echo the greeting's time
+        run: echo 'The time was ${{ steps.hello.outputs.time }}.'
+  thired:
+    name: thired
+    needs: first
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hello world
+        uses: actions/hello-world-javascript-action@v1
+        with:
+          who-to-greet: 'Mona the Octocat'
+        id: hello
+      - name: Echo the greeting's time
+        run: echo 'The time was ${{ steps.hello.outputs.time }}.'
+  fourth:
+    name: forth
+    needs: [second, thired]
     runs-on: ubuntu-latest
     steps:
       - name: Hello world
